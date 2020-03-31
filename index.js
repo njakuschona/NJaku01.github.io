@@ -38,8 +38,10 @@ function renderPlaces(places) {
        model.setAttribute('lock-at', '[gps-camera]');
        model.setAttribute('scale', '120 120 120');
 
+       console.log(model)
        model.addEventListener('loaded', () => {
            window.dispatchEvent(new CustomEvent('gps-entity-place-loaded'))
+            console.log("loaded")
        });
 
        scene.appendChild(model);
@@ -52,4 +54,6 @@ function renderPlaces(places) {
 function getDistance() {
     const distanceMsg = document.querySelector('[gps-entity-place]').getAttribute('distanceMsg');
     console.log(distanceMsg);   // "890 meters"
+    const text = document.getElementById('distance');
+    text.innerHTML=distanceMsg;
 }
