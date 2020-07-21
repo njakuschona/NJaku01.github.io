@@ -9,22 +9,32 @@
     <script src="https://raw.githack.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script>
     <script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
     <script src="https://unpkg.com/aframe-particle-system-component@1.0.x/dist/aframe-particle-system-component.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css">
+    <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
     <link rel="stylesheet" type="text/css" href="public/style.css">
   </head>
 
   <script src="public/index.js" ></script>
   <body style="margin: 0; overflow: hidden;">
-    <a-scene
+  <div data-role="splitter" class="h-100" data-split-mode="vertical">
+  <div class="d-flex flex-justify-center flex-align-center">
+  <a-scene  id=1 "
     vr-mode-ui='enabled: false' 
     embedded
     arjs='sourceType: webcam; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960; debugUIEnabled: false;'>
     
 
     
-
-      <a-camera gps-camera rotation-reader> </a-camera>
-
+     <a-camera gps-camera rotation-reader> </a-camera>
     </a-scene>
+  </div>
+  <div class="d-flex flex-justify-center flex-align-center">
+    <a-scene  id=2 vr-mode-ui='enabled: false' embedded>
+    </a-scene>
+  </div>
+
+  </div>
+
     <div id="buttons">
       <button onclick="">Go to Paper</button>
       <button onclick="">Change view</button>
