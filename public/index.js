@@ -2,7 +2,7 @@
 
 
 window.onload = () => {
-    //renderDust()
+    renderDust()
 };
 function translateRange(Input , inputHigh , inputLow , outputHigh , OutputLow) {
 
@@ -22,7 +22,7 @@ function renderDust() {
    let dust = document.createElement('a-entity');
    dust.setAttribute('position', '0 2.25 -15');
    dust.setAttribute('id', 'particles ' + 1);
-   pm10ValueVisualized = Math.floor(translateRange(5, 65, 0, 200000, 0));
+   pm10ValueVisualized = Math.floor(translateRange(100, 65, 0, 200000, 0));
    dust.setAttribute('particle-system', 'preset: dust; particleCount: ' + pm10ValueVisualized + ';  color: #61210B, #61380B, #3B170B');
    scene.appendChild(dust);
    console.log("renderer")

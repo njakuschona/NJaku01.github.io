@@ -12,24 +12,28 @@
     <link rel="stylesheet" type="text/css" href="public/style.css">
   </head>
 
-  <script src="public/index.js" ></script>
   <body style="margin: 0; overflow: hidden;">
+
     <a-scene
     vr-mode-ui='enabled: false' 
     embedded
     arjs='sourceType: webcam; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960; debugUIEnabled: false;'>
-    
-
-    
-
+      <a-assets>
+        <img id="my-image" alpha-test="0.5" src="public/Rplot.png">
+      </a-assets>
       <a-camera gps-camera rotation-reader> </a-camera>
+    
+      <!-- Using the asset management system. -->
+      <a-image material="alphaTest: 0.5" cale="120 120 120" position = "1 1 1" look-at="[gps-camera]" alpha-test="0.5" src="#my-image"></a-image>
+    
 
     </a-scene>
+
     <div id="buttons">
-      <button onclick="">Go to Paper</button>
-      <button onclick="">Change view</button>
-      <select></select>
-      <p id="distance"></p>
-     </div>
+        <button onclick="">Go to Paper</button>
+        <button onclick="">Change view</button>
+        <select></select>
+        <p id="distance"></p>
+        </div>
   </body>
 </html>
