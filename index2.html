@@ -9,6 +9,7 @@
     <script src="https://raw.githack.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script>
     <script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
     <script src="https://unpkg.com/aframe-particle-system-component@1.0.x/dist/aframe-particle-system-component.min.js"></script>
+    <script src="public/index2.js"></script>
     <link rel="stylesheet" type="text/css" href="public/style.css">
   </head>
 
@@ -16,24 +17,76 @@
 
     <a-scene
     vr-mode-ui='enabled: false' 
+    id=1
     embedded
     arjs='sourceType: webcam; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960; debugUIEnabled: false;'>
-      <a-assets>
-        <img id="my-image" alpha-test="0.5" src="public/Rplot.png">
-      </a-assets>
+
       <a-camera gps-camera rotation-reader> </a-camera>
     
       <!-- Using the asset management system. -->
-      <a-image material="alphaTest: 0.5" cale="120 120 120" position = "1 1 1" look-at="[gps-camera]" alpha-test="0.5" src="#my-image"></a-image>
     
 
     </a-scene>
 
+    <div id="legend">
+        <table style="width: 100%; padding: 2%;" >
+              <tr>
+                <td style="width: 10%;">Calculated: </td>
+                <td style="background-color: red;"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td> 17 ppb</td>
+              </tr>
+              <tr>
+                <td style="width: 10%;">Difference: </td>
+                <td style="background-color: blue;"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td> 2 ppb </td>
+              </tr>              <tr>
+                <td style="width: 10%;">Measured: </td>
+                <td style="background-color: red;"></td>
+                <td style="text-align: center;">+</td>
+                <td style="background-color: blue;"></td>
+                <td></td>
+                <td style="min-width: 30%"> 19 ppb</td>
+              </tr>
+
+        </table>
+    </div>
+
     <div id="buttons">
         <button onclick="">Go to Paper</button>
-        <button onclick="">Change view</button>
-        <select></select>
+        <label for="view">Choose view :</label>
+        <select name="view" id="view">
+          <option value="side">Side by Side</option>
+          <option value="dif">Difference</option>
+          <option value="Measured">Measured Only</option>
+          <option value="calc">Calculated Only</option>
+        </select>
+        <label for="pollutant">Choose a air pollutant :</label>
+  
+  <select name="pollutant" id="pollutant" onchange="changePollutant()">
+    <option value="CO2">CO2</option>
+    <option value="NH3">NH3</option>
+    <option value="NO">NO</option>
+    <option value="NOx">NOx</option>
+    <option value="O3">O3</option>
+    <option value="PM10">PM10</option>
+    <option value="PM1">PM1</option>
+    <option value="PM2.5">PM2.5</option>
+    <option value="PN10">PN10</option>
+  </select>
+  <label for="options">Choose a predictor </label>
+  
+  <select name="pollutant" id="pollutant">
+    <option value="traffic">Number of vehicles</option>
+    <option value="sound">Sound Measurements</option>
+    <option value="time">Day of the Week</option>
+  </select>
         <p id="distance"></p>
-        </div>
+       </div>
   </body>
 </html>

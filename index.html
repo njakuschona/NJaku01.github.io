@@ -16,8 +16,9 @@
 
   <script src="public/index.js" ></script>
   <body style="margin: 0; overflow: hidden;">
-  <div data-role="splitter" class="h-100" data-split-mode="vertical">
-  <div class="d-flex flex-justify-center flex-align-center">
+  <div data-role="splitter" class="h-100">
+  <div class="d-flex flex-justify-end flex-align-top">
+    <div style="max-height: 5%; background-color: red; position: absolute;" >Calculated: 19 ppb</div>
   <a-scene  id=1 "
     vr-mode-ui='enabled: false' 
     embedded
@@ -28,7 +29,8 @@
      <a-camera gps-camera rotation-reader> </a-camera>
     </a-scene>
   </div>
-  <div class="d-flex flex-justify-center flex-align-center">
+  <div class="d-flex flex-justify-left flex-align-top">
+    <div style="max-height: 5%; position: absolute; background-color: blue;" >Measured: 17 ppb</div>
     <a-scene  id=2 vr-mode-ui='enabled: false' embedded>
     </a-scene>
   </div>
@@ -37,8 +39,33 @@
 
     <div id="buttons">
       <button onclick="">Go to Paper</button>
-      <button onclick="">Change view</button>
-      <select></select>
+      <label for="view">Choose view :</label>
+      <select name="view" id="view">
+        <option value="side">Side by Side</option>
+        <option value="dif">Difference</option>
+        <option value="Measured">Measured Only</option>
+        <option value="calc">Calculated Only</option>
+      </select>
+      <label for="pollutant">Choose a air pollutant :</label>
+
+<select name="pollutant" id="pollutant" onchange="changePollutant()">
+  <option value="CO2">CO2</option>
+  <option value="NH3">NH3</option>
+  <option value="NO">NO</option>
+  <option value="NOx">NOx</option>
+  <option value="O3">O3</option>
+  <option value="PM10">PM10</option>
+  <option value="PM1">PM1</option>
+  <option value="PM2.5">PM2.5</option>
+  <option value="PN10">PN10</option>
+</select>
+<label for="options">Choose a predictor </label>
+
+<select name="pollutant" id="pollutant">
+  <option value="traffic">Number of vehicles</option>
+  <option value="sound">Sound Measurements</option>
+  <option value="time">Day of the Week</option>
+</select>
       <p id="distance"></p>
      </div>
   </body>
