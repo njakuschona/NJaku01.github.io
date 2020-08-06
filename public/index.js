@@ -2,6 +2,7 @@
 var csv;
 var pollutant= "CO2"
 var predictor= "traffic"
+var view= "overlay"
 
 window.onload = () => {
 
@@ -11,9 +12,10 @@ window.onload = () => {
         type: "GET",
         url: "/public/GemittelteWerte.csv",
         dataType: "text",
-        success: function(data) {csv = $.csv.toObjects(data);console.log(csv)}
+        success: function(data) {csv = $.csv.toObjects(data);console.log(csv); initalize();}
      });
     
+ 
 };
 function translateRange(Input , inputHigh , inputLow , outputHigh , OutputLow) {
 
@@ -22,7 +24,11 @@ function translateRange(Input , inputHigh , inputLow , outputHigh , OutputLow) {
 }
 let dust;
 let dust2;
+let dust3;
+let dust4;
 function renderDust(dustP, dustO, low, high, unit) {
+
+    redraw([{source: "predicted", value: dustP},{source: "observed", value: dustO}])
    let scene = document.getElementById('1');
    let scene2 = document.getElementById('2');
    let obs= document.getElementById("obs");
@@ -54,13 +60,68 @@ function renderDust(dustP, dustO, low, high, unit) {
    console.log("renderer")
 }
 
+function renderDustComparison(dustP, dustO, low, high, unit) {
+    let scene = document.getElementById('3');
+
+    redraw([{source: "predicted", value: dustP},{source: "observed", value: dustO}])
+ 
+    if(dust3){
+    scene.removeChild(dust3)
+    scene.removeChild(dust4)
+    }
+    let base;
+    let add;
+    let top;
+    if(dustP  > dustO){
+         base=dustO
+         top=dustP
+         add= dustP-dustO
+         document.getElementById("base").innerHTML = "Observed:"
+         document.getElementById("add").innerHTML = "Predicted:" 
+         document.getElementById("baseValue").innerHTML = dustO.substring(0,7) + " " + unit
+         document.getElementById("value").innerHTML = dustP.substring(0,7) + " " + unit
+         document.getElementById("addValue").innerHTML = add.toString().substring(0,7) + " " + unit
+    }
+    else{
+        base = dustP
+        top = dustO
+        add = dustO-dustP
+        document.getElementById("add").innerHTML = "Observed:"
+        document.getElementById("base").innerHTML = "Predicted:" 
+        document.getElementById("value").innerHTML = dustO.substring(0,7) + " " + unit
+        document.getElementById("baseValue").innerHTML = dustP.substring(0,7) + " " + unit
+        document.getElementById("addValue").innerHTML = add.toString().substring(0,7) + " " + unit
+    }
+ 
+    dust3 = document.createElement('a-entity');
+    dust3.setAttribute('position', '0 2.25 -15');
+    dust3.setAttribute('id', 'particles ' + 1);
+    particle1 = Math.floor(translateRange(base, high, low, 20000, 0));
+    console.log(particle1)
+    dust3.setAttribute('particle-system', 'preset: dust; particleCount: ' + particle1 + ';' + 'size: 2;' + 'color: #61210B, #61380B, #3B170B');
+    scene.appendChild(dust3);
+ 
+    dust4 = document.createElement('a-entity');
+    dust4.setAttribute('position', '0 2.25 -15');
+    dust4.setAttribute('id', 'particles ' + 2);
+    particle2 = Math.floor(translateRange(top, high, low, 20000, 0));
+    console.log(particle2)
+    dust4.setAttribute('particle-system', 'preset: dust; particleCount: ' + (particle2 - particle1) + ';  size:2; color: #3e79b8, #3e91b8, #3eaab8');
+    scene.appendChild(dust4);
+    console.log("renderer")
+ }
+
 changePollutant = () => {
-    pollutant= document.getElementById("pollutant").value
+    pollutant= document.getElementById("pollutant").value;
+    updateAxis(csv[6][pollutant], csv[7][pollutant]);
     change();
+    closeOptions();
 }
 changePredictor = () => {
-    predictor= document.getElementById("predictor").value
+    predictor= document.getElementById("predictor").value;
+
     change();
+    closeOptions();
 }
 
 openOptions= () =>{
@@ -74,14 +135,39 @@ closeOptions= () =>{
     charm.close();
 }
 
+changeView= () =>{
+    view=document.getElementById("view").value;
+    if(view=== "overlay"){
+        document.getElementById("split").style.display="flex"
+        document.getElementById("single").style.display="none"
+    }
+    else{
+        document.getElementById("split").style.display="none"
+        document.getElementById("single").style.display="flex"
+    }
+    change();
+    closeOptions();
+}
 change = () => {
+    let a,b;
     if(predictor== "traffic"){
-        renderDust(csv[4][pollutant], csv[1][pollutant], csv[6][pollutant], csv[7][pollutant], csv[8][pollutant])
+        a=4; b=2;
     }
     else if(predictor== "sound"){
-        renderDust(csv[3][pollutant], csv[0][pollutant], csv[6][pollutant], csv[7][pollutant], csv[8][pollutant])
+        a=3; b=0;
     }
     else if(predictor== "time"){
-        renderDust(csv[5][pollutant], csv[2][pollutant], csv[6][pollutant], csv[7][pollutant], csv[8][pollutant])
+        a=5; b=2;
     }
+
+    if(view=== "overlay"){
+        renderDust(csv[a][pollutant], csv[b][pollutant], csv[6][pollutant], csv[7][pollutant], csv[8][pollutant])
+    }
+    else{
+        renderDustComparison(csv[a][pollutant], csv[b][pollutant], csv[6][pollutant], csv[7][pollutant], csv[8][pollutant])
+    }
+    
 }
+
+
+

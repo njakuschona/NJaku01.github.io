@@ -27,3 +27,18 @@
 td {
   width: 5%;
 }
+
+div#container {
+  position: absolute;
+  top: 0%;
+  right: 0%;
+  width: 120px;
+  height: 180px;
+  margin: auto;
+  background-color: rgba(255, 254, 254, 0.6);
+}
+
+svg{
+  width: 120px;
+  height: 200px;
+}

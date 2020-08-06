@@ -1,87 +1,135 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>GeoAR.js demo</title>
-    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
-    <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
-    <script src="https://raw.githack.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script>
-    <script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
-    <script src="https://unpkg.com/aframe-particle-system-component@1.0.x/dist/aframe-particle-system-component.min.js"></script>
-    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="public/jquery.csv.min.js"></script>
 
-    <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css">
-    <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="public/style.css">
-  </head>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>GeoAR.js demo</title>
+  <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+  <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
+  <script src="https://raw.githack.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script>
+  <script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
 
-  <script src="public/index.js" ></script>
-  <body style="margin: 0; overflow: hidden;">
-  <div data-role="splitter" class="h-100">
-  <div class="d-flex flex-justify-end flex-align-top">
-    <div style="max-height: 5%; background-color: red; position: absolute;" >Predicted: <span id="pre">19 ppb</span></div>
-  <a-scene  id=1 "
+  <script
+    src="https://unpkg.com/aframe-particle-system-component@1.0.x/dist/aframe-particle-system-component.min.js"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="public/jquery.csv.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css">
+  <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="public/style.css">
+</head>
+<script src="public/index2.js"></script>
+<script src="public/index.js"></script>
+
+<body style="margin: 0; overflow: hidden;">
+  <div data-role="splitter" class="h-100" id="split">
+    <div class="d-flex flex-justify-end flex-align-top">
+      <div style="max-height: 5%; background-color: orangered; position: absolute;">Predicted: <span id="pre">19 ppb</span>
+      </div>
+      <a-scene id=1 
     vr-mode-ui='enabled: false' 
-    embedded
-    arjs='sourceType: webcam; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960; debugUIEnabled: false;'>
-    
+    embedded>
+  </a-scene>
+  </div>
+  <div class=" d-flex flex-justify-left flex-align-top">
+        <div style="max-height: 5%; position: absolute; background-color: blue;">Observed: <span id=obs>17 ppb</span>
+        </div>
+        <a-scene id=2 vr-mode-ui='enabled: false' embedded >
+        </a-scene>
+    </div>
+  </div>
+  <div id="single" class="h-100" style="display: none !important;">
+    <div id="legend">
+      <table style="width: 100%; padding: 2%;" >
+            <tr>
+              <td style="width: 10%;" id="base">Calculated: </td>
+              <td style="background-color: yellow;" id=baseColor></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td id="baseValue"> 17 ppb</td>
+            </tr>
+            <tr>
+              <td style="width: 10%;" >Difference: </td>
+              <td style="background-color: purple;" id=addColor></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td id="addValue"> 2 ppb </td>
+            </tr>              <tr>
+              <td style="width: 10%;" id="add">Measured: </td>
+              <td style="background-color: yellow;"></td>
+              <td style="text-align: center;">+</td>
+              <td style="background-color: purple;"></td>
+              <td></td>
+              <td id="value" tyle="min-width: 30%"> 19 ppb</td>
+            </tr>
 
-    
-     <a-camera gps-camera rotation-reader> </a-camera>
+      </table>
+  </div>
+    <a-scene id=3 vr-mode-ui='enabled: false' embedded >
     </a-scene>
   </div>
-  <div class="d-flex flex-justify-left flex-align-top">
-    <div style="max-height: 5%; position: absolute; background-color: blue;" >Observed: <span id=obs>17 ppb</span></div>
-    <a-scene  id=2 vr-mode-ui='enabled: false' embedded>
-    </a-scene>
+  
+  <a-scene id=camera vr-mode-ui='enabled: false' embedded 
+  arjs='sourceType: webcam; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960; debugUIEnabled: false;'>
+    <a-camera gps-camera rotation-reader> </a-camera>
+  </a-scene>
+  <div id=buttons>
+    <button class="button primary" style="width: 50%;" onclick="openOptions()"><span class="mif-info"></span>
+      Introduction</button>
+    <button class="button primary" style="width: 50%;" onclick="openOptions()"><span class="mif-chevron-thin-up"></span>
+      Options</button>
   </div>
-
-  </div>
-<div id=buttons>
-  <button class="button primary" style="width: 50%;" onclick="openOptions()"><span class="mif-info"></span> Introduction</button>
-  <button class="button primary" style="width: 50%;" onclick="openOptions()"><span class="mif-chevron-thin-up"></span> Options</button>
-</div>
 
   <ul id="bottom" style="min-width: 100vw; height: 60%;" data-role="bottomsheet">
-    
+
     <div style="padding: 1%; text-align: center;">
-    <button class="button primary cycle large" onclick="closeOptions()"><span class="mif-chevron-thin-down"></span></button>
+      <button class="button primary cycle large" onclick="closeOptions()"><span
+          class="mif-chevron-thin-down"></span></button>
     </div>
     <div style="padding: 5%; min-width: 100vw; height: fit-content;">
-      
+
       <label for="view">Choose view :</label>
-      <select name="view" id="view">
-        <option value="side">Side by Side</option>
-        <option value="dif">Difference</option>
+      <select name="view" id="view" onchange="changeView()">
+        <option value="overlay">Overlay</option>
+        <option value="dif">Differences</option>
         <option value="Measured">Measured Only</option>
         <option value="calc">Calculated Only</option>
       </select>
-      <br/>
+      <br />
       <label for="pollutant">Choose a air pollutant :</label>
 
-<select name="pollutant" id="pollutant" onchange="changePollutant()">
-  <option value="CO2">CO2</option>
-  <option value="NH3">NH3</option>
-  <option value="NO">NO</option>
-  <option value="NOx">NOx</option>
-  <option value="O3">O3</option>
-  <option value="PM10">PM10</option>
-  <option value="PM1">PM1</option>
-  <option value="PM2.5">PM2.5</option>
-  <option value="PN10">PN10</option>
-</select>
-<br/>
-<label for="options">Choose a predictor </label>
+      <select name="pollutant" id="pollutant" onchange="changePollutant()">
+        <option value="CO2">CO2</option>
+        <option value="NH3">NH3</option>
+        <option value="NO">NO</option>
+        <option value="NO2">NO2</option>
+        <option value="NOx">NOx</option>
+        <option value="O3">O3</option>
+        <option value="PM10">PM10</option>
+        <option value="PM1">PM1</option>
+        <option value="PM2.5">PM2.5</option>
+        <option value="PN10">PN10</option>
+      </select>
+      <br />
+      <label for="options">Choose a predictor </label>
 
-<select name="predictor" id="predictor" onchange="changePredictor()">
-  <option value="traffic">Number of vehicles</option>
-  <option value="sound">Sound Measurements</option>
-  <option value="time">Day of the Week</option>
-</select>
-</div>
-    </ul>
-  </body>
+      <select name="predictor" id="predictor" onchange="changePredictor()">
+        <option value="traffic">Number of vehicles (traffic)</option>
+        <option value="sound">Sound Measurements (sound)</option>
+        <option value="time">Day of the Week (time)</option>
+      </select>
+    </div>
+  </ul>
+
+
+  <div id='container'>
+    <svg></svg>
+  </div>
+</body>
+
 </html>
