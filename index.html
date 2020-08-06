@@ -4,12 +4,14 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <?xml version="1.0" encoding="UTF-8"?>
   <title>GeoAR.js demo</title>
   <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
   <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
   <script src="https://raw.githack.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script>
   <script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
   <script src="https://d3js.org/d3.v5.min.js"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="public/logo2.ico" />
 
   <script
     src="https://unpkg.com/aframe-particle-system-component@1.0.x/dist/aframe-particle-system-component.min.js"></script>
@@ -25,7 +27,106 @@
 <script src="public/index.js"></script>
 
 <body style="margin: 0; overflow: hidden;">
-  <div data-role="splitter" class="h-100" id="split">
+  <div id=start style="width: 100%; height: 100%;">
+    <img style="padding-top: 10%;" src="public/logo2.PNG" alt="">
+    <br>
+    <br>
+    <br>
+    <button class="button primary large" onclick="startIntro()">
+      Start introduction
+    </button>
+    <br>
+    <br>
+    <br>
+    <button class="button primary large" onclick="startApp()">
+      Start app
+    </button>
+  </div>
+  <div id="intro" data-role="wizard" onPage="pageChange()" data-finish="1" style="display: none; left: 0; top: 0; background-color: transparent; width: 100vw; pointer-events: none;">
+    <section style="height: 100vh;"><div class="page-content">
+      <h3>Welcome to PapAR</h3>
+      <h6>Our goal is to bring scientific papers to life</h6>
+      <p>
+        This introduction will introduce you to the paper, that we display through our App. 
+        Additonaly it will explain you how this app works.
+      </p>
+      <p>
+        To go to the next step please click on this icon at the bottom: <span class="mif-arrow-right"></span>. 
+        To go a step back you can always click on this icon: <span class="mif-arrow-left"></span>.
+        If you want to got directly to the app, you can skipp the introduction, by clicking on this icon: <span class="mif-checkmark"></span>.
+      </p>
+    </div></section>
+    <section>
+      <div class="page-content">     
+       <h3>Welcome to PapAR</h3>
+      <h6>Our goal is to bring scientific papers to life</h6>
+      <p>
+        To archive our goal, we use Augmented Reality. With Augmented Reality, we want to make complex variables and insights easier to understand. For Example, with Augmented Reality, we can visualize unobservable phenomena such as airflow. We will use your camera to show you a copy of the actual world you see on the mobile phone. Our App will add virtual objects that display Information. The opportunity for you is that you can inspect and analyse the information directly on site.
+      </p>
+      <p>
+        At the moment there is only one paper to inspect. In the next step we want to introduce this paper to you.
+      </p>
+    </div>
+  </section>
+    <section><div class="page-content">
+      <h6>Modelling of Urban Air Pollutant Concentrations with Artiﬁcial Neural Networks Using Novel Input Variables</h6>
+      <p>Since operating urban air quality stations is not only time consuming but also costly, and because air pollutants can cause serious health problems, this paper presents the hourly prediction of ten air pollutant concentrations (CO2, NH3, NO, NO2, NOx, O3, PM1, PM2.5, PM10 and PN10) in a street canyon in Münster using an artiﬁcial neural network (ANN) approach. Special attention was paid to comparing three predictor options representing the traﬃc volume: we included acoustic sound measurements (sound), the total number of vehicles (traﬃc), and the hour of the day and the day of the week(time) as input variables and then compared their prediction powers. </p>
+      <p>Please continue reading on the next page. <span class="mif-arrow-right"></span></p>
+
+    </div></section>
+    <section><div class="page-content">
+      <h6>Modelling of Urban Air Pollutant Concentrations with Artiﬁcial Neural Networks Using Novel Input Variables</h6>
+      <p>   The models were trained, validated and tested to evaluate their performance. All three input variable options (sound, traﬃc and time) proved to be suitable and showed distinct strengths for modelling various air pollutant concentrations.</p>
+      <p>The predicted and measured values, refer to the city center of Münster, Germany</p>
+      <p> Great you made it this far. We hope you now understand what the paper is about. In the next step we will explain what you will see in the app</p>
+    </div></section>
+    <section class="small"><div class="page-content" >
+      <p>
+        The air pollutants are displayed as small points. The more points displayed, the greater the proportion of air pollutant in the air.
+        Currently the average value of number of points is displayed 10000.
+      </p>
+    </div></section>
+    <section class="small"><div class="page-content" >
+      <p>
+        Now the maximum number of points is displayed 20000.
+      </p>
+    </div></section>
+    <section class="small"><div class="page-content" >
+      <p>
+        The app contains two views. Actual you see the "overlay" view.
+         On the left side you see the predicted value for the air pollutant CO<sub>2</sub> (red). On the right the observed value (blue).
+         You can adjust the view by moving the slider in the middle. Try it if you want.
+      </p>
+    </div></section>
+    <section class="small"><div class="page-content" >
+      <p>
+        The second view ist the "differences" view. In yellow, you see the observed value of the air pollutant CO<sub>2</sub> (!This could change if you change the pollutant or prediction parameter). The difference of the predicted and observed value is displayed in purple.
+        The predicted value is displayed as an aggregate of the yellow and pink dots.
+      </p>
+    </div></section>
+    <section class="small"><div class="page-content" >
+      <p>
+        In the right top corner, you will find a diagram. The left red bar represents the predicted value, the right blue bar the observed value. Note that since the different air pollutant emissions have different units, the left scale changes depending on the air pollutant. On the right side the number of points displayed is shown.
+      </p>
+    </div></section>
+    <section class="small"><div class="page-content" >
+      <p>
+        If you want to change the view, air pollutant or time parameter, click in the right bottom corner on "options". 
+        To select something, click on the previous value. A selection of options opens. Select the desired value.
+        You can close the options with a click on the following icon: <span class="mif-chevron-thin-down"></span> Feel free to try it out directly.
+      </p>
+    </div></section>
+    <section class="small"><div class="page-content" >
+      <p>
+        Yeah, you are done. I hope you understand everything and enjoy using the app. 
+        You can now close the introduction with the following icon: <span class="mif-checkmark"></span>
+      </p>
+      <p>
+        If you want to read the introduction again, just click on the button in the lower left corner "introduction".
+      </p>
+    </div></section>
+</div>
+  <div data-role="splitter" class="h-100" id="split" style="display: none;">
     <div class="d-flex flex-justify-end flex-align-top">
       <div style="max-height: 5%; background-color: orangered; position: absolute;">Predicted: <span id="pre">19 ppb</span>
       </div>
@@ -42,8 +143,8 @@
     </div>
   </div>
   <div id="single" class="h-100" style="display: none !important;">
-    <div id="legend">
-      <table style="width: 100%; padding: 2%;" >
+    <div id="legend" style="width: 60%;" >
+      <table style="padding: 4%;" >
             <tr>
               <td style="width: 10%;" id="base">Calculated: </td>
               <td style="background-color: yellow;" id=baseColor></td>
@@ -73,13 +174,16 @@
     <a-scene id=3 vr-mode-ui='enabled: false' embedded >
     </a-scene>
   </div>
+
+  <a-scene id=introDust vr-mode-ui='enabled: false' embedded >
+  </a-scene>
   
   <a-scene id=camera vr-mode-ui='enabled: false' embedded 
   arjs='sourceType: webcam; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960; debugUIEnabled: false;'>
     <a-camera gps-camera rotation-reader> </a-camera>
   </a-scene>
   <div id=buttons>
-    <button class="button primary" style="width: 50%;" onclick="openOptions()"><span class="mif-info"></span>
+    <button class="button primary" style="width: 50%;" onclick="startIntro()"><span class="mif-info"></span>
       Introduction</button>
     <button class="button primary" style="width: 50%;" onclick="openOptions()"><span class="mif-chevron-thin-up"></span>
       Options</button>
@@ -104,16 +208,16 @@
       <label for="pollutant">Choose a air pollutant :</label>
 
       <select name="pollutant" id="pollutant" onchange="changePollutant()">
-        <option value="CO2">CO2</option>
-        <option value="NH3">NH3</option>
+        <option value="CO2" >CO&#x2082</option>
+        <option value="NH3">NH&#x2083</option>
         <option value="NO">NO</option>
-        <option value="NO2">NO2</option>
-        <option value="NOx">NOx</option>
-        <option value="O3">O3</option>
-        <option value="PM10">PM10</option>
-        <option value="PM1">PM1</option>
-        <option value="PM2.5">PM2.5</option>
-        <option value="PN10">PN10</option>
+        <option value="NO2">NO&#x2082</option>
+        <option value="NOx">NO&#x2093</option>
+        <option value="O3">O&#x2083</option>
+        <option value="PM10">PM&#x2081&#x2080</option>
+        <option value="PM1">PM&#x2081</option>
+        <option value="PM2.5" >PM2.5</option>
+        <option value="PN10">PN&#x2081&#x2080</option>
       </select>
       <br />
       <label for="options">Choose a predictor </label>
@@ -128,7 +232,7 @@
 
 
   <div id='container'>
-    <svg></svg>
+    <svg ></svg>
   </div>
 </body>
 

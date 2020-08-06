@@ -1,5 +1,5 @@
 #buttons {
-    z-index: 10000;
+    z-index: 2001;
     position: fixed;
     bottom: 0%;
     left:0%;
@@ -36,9 +36,62 @@ div#container {
   height: 180px;
   margin: auto;
   background-color: rgba(255, 254, 254, 0.6);
+  margin-top: 25px;
 }
 
 svg{
   width: 120px;
   height: 200px;
+}
+
+#start{
+  background-color: white;
+  z-index: 2011;
+  min-width: 100vw;
+  min-height: 100vh;
+  position: flex;
+  text-align: center;
+  text-justify: center;
+}
+#intro{
+  background-color: white;
+  z-index: 2003;
+  width: 100vw;
+  position: absolute;
+  height: 100vh;
+  text-align: center;
+  text-justify: center;
+}
+
+.wizard-btn-help{
+  display: none !important;
+}
+
+.pageContent{
+  z-index: 2004;
+  margin: 5%;
+}
+.action-bar{
+  pointer-events: all;
+}
+p{
+  text-align: justify;
+  overflow: hidden;
+  word-wrap: none;
+}
+.small{
+  top: 50%;
+  height: 40%;
+  background-color: white;
+}
+section{
+  background-color: white;
+}
+
+#bottom{
+  z-index: 2010;
+}
+
+.wizard>section{
+  border-left-width: 1px;
 }

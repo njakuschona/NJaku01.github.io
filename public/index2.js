@@ -90,13 +90,6 @@ y2Scale = d3.scaleLinear()
     .attr('width', xScale.bandwidth())
     .attr('fill', (g) => g.color)
   
-  svg
-    .append('text')
-    .attr('x', height )
-    .attr('y', margin / 2.4)
-    .attr('transform', 'rotate(-90)')
-    .attr('text-anchor', 'middle')
-    .text('Point Density')
 
     svg
     .append('text')
@@ -115,18 +108,19 @@ y2Scale = d3.scaleLinear()
     .text('Observed')
     svg
     .append('text')
+    .attr('id', 'change')
     .attr('font-size', "11px")
     .attr('x', -(height / 2)- 5)
-    .attr('y', margin / 2.4)
+    .attr('y', 10)
     .attr('transform', 'rotate(-90)')
     .attr('text-anchor', 'middle')
-    .text('Point Density')
+    .html('Point Density')
     
    svg
     .append('text')
     .attr('font-size', "11px")
     .attr('x', -(height / 2) - 5)
-    .attr('y', margin * 1.6 + width)
+    .attr('y', margin * 1.8 + width)
     .attr('transform', 'rotate(-90)')
     .attr('text-anchor', 'middle')
     .text('Point Desity in thousend')
@@ -142,11 +136,15 @@ function updateAxis(min, max ){
   axisLeft.scale(yScale)
   svg.select(".y")
   .call(axisLeft)
+}
 
+function updateText(text){
+d3.select("#change")
+  .html(text);
 }
 
 function redraw(data) {
-     
+     console.log(data)
    // Update…
        chart.selectAll("rect")
            .data(data)
