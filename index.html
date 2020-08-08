@@ -82,6 +82,7 @@
     <section><div class="page-content">
       <h6>Modelling of Urban Air Pollutant Concentrations with Artiﬁcial Neural Networks Using Novel Input Variables</h6>
       <p>   The models were trained, validated and tested to evaluate their performance. All three input variable options (sound, traﬃc and time) proved to be suitable and showed distinct strengths for modelling various air pollutant concentrations.</p>
+     <br/> 
       <p>The predicted and measured values refer to the city center of Münster, Germany</p>
       <p> Great you made it this far. We hope you understand now what the paper is about. In the next step we will explain what you will see in the app</p>
     </div></section>
@@ -90,10 +91,16 @@
         The air pollution levels are indicated by small dots on your device. The more points displayed, the higher the proportion of air pollutant in the air.
         The range number of points reaches from 0 to 20000 points. Currently, there are 10000 points dispayed.
       </p>
+      <p>
+        Pleasde note: The app needs a few secondes to render all points.
+      </p>
     </div></section>
     <section class="small"><div class="page-content" >
       <p>
         Now the maximum number of points, 20000, is displayed.
+      </p>
+      <p>
+        Pleasde note: The app needs a few secondes to render all points.
       </p>
     </div></section>
     <section class="small"><div class="page-content" >
@@ -167,9 +174,9 @@
               <td id="addValue"> 2 ppb </td>
             </tr>              <tr>
               <td style="width: 10%;" id="add">Measured: </td>
-              <td style="background-color: yellow;"></td>
+              <td style="background-color: yellow; text-align: center; color: black">Observed</td>
               <td style="text-align: center;">+</td>
-              <td style="background-color: purple;"></td>
+              <td style="background-color: purple;text-align: center; color: black">Difference</td>
               <td></td>
               <td id="value" tyle="min-width: 30%"> 19 ppb</td>
             </tr>
@@ -183,7 +190,7 @@
   <a-scene id=introDust vr-mode-ui='enabled: false' embedded >
   </a-scene>
   
-  <a-scene id=camera vr-mode-ui='enabled: false' embedded 
+  <a-scene id=camera vr-mode-ui='enabled: false' embedded style="bottom: 0;"
   arjs='sourceType: webcam; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960; debugUIEnabled: false;'>
     <a-camera gps-camera rotation-reader> </a-camera>
   </a-scene>

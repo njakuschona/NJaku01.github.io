@@ -114,7 +114,7 @@ y2Scale = d3.scaleLinear()
     .attr('y', 10)
     .attr('transform', 'rotate(-90)')
     .attr('text-anchor', 'middle')
-    .html('Point Density')
+    .html('Point density')
     
    svg
     .append('text')
@@ -123,7 +123,7 @@ y2Scale = d3.scaleLinear()
     .attr('y', margin * 1.8 + width)
     .attr('transform', 'rotate(-90)')
     .attr('text-anchor', 'middle')
-    .text('Point Desity in thousend')
+    .text('Point density in thousend')
 
 }
 function updateAxis(min, max ){

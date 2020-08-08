@@ -99,7 +99,7 @@ let introDust;
 function renderIntroDust(dust){
 
     let scene=document.getElementById('introDust');
-    updateText("Point Density")
+    updateText("Point density")
 
     if(introDust){
         scene.removeChild(introDust)

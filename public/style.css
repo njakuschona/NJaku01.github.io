@@ -66,6 +66,14 @@ svg{
 .wizard-btn-help{
   display: none !important;
 }
+.wizard-btn-finish{
+  position: absolute;
+  right: 0;
+}
+
+#arjsDebugUIContainer{
+  display: none;
+}
 
 .pageContent{
   z-index: 2004;
@@ -73,6 +81,8 @@ svg{
 }
 .action-bar{
   pointer-events: all;
+  width: 80vw;
+  margin-left: 20px;
 }
 p{
   text-align: justify;
