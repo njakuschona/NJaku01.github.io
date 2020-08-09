@@ -4,6 +4,12 @@ var pollutant= "CO2"
 var predictor= "traffic"
 var view= "overlay"
 
+$('input, select, textarea').on('focus',function() {
+    var curScroll = $(window).scrollTop();
+    $('html, body').animate({scrollTop:curScroll},1);
+});
+
+
 window.onload = () => {
 
 

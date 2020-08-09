@@ -81,7 +81,10 @@ svg{
 }
 .action-bar{
   pointer-events: all;
-  width: 80vw;
+  width: 80vw; 
+}
+
+.wizard .action-bar>*{
   margin-left: 20px;
 }
 p{
