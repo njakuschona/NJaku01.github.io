@@ -113,7 +113,7 @@ function renderIntroDust(dust){
     introDust = document.createElement('a-entity');
     introDust.setAttribute('position', '0 2.25 -15');
     introDust.setAttribute('id', 'particles ' + 1);
-    introDust.setAttribute('particle-system', 'preset: dust; particleCount: ' + dust + ';  size: 2;color: #61210B, #61380B, #3B170B');
+    introDust.setAttribute('particle-system', 'preset: dust; particleCount: ' + dust + ';  size: 2;color: #ff4a03, #ff0b03, #ff0370');
     scene.appendChild(introDust);
 }
 function renderDust(dustP, dustO, low, high, unit) {
@@ -138,7 +138,7 @@ function renderDust(dustP, dustO, low, high, unit) {
    dust.setAttribute('id', 'particles ' + 1);
    pm10ValueVisualized = Math.floor(translateRange(dustP, high, low, 20000, 0));
    console.log(pm10ValueVisualized)
-   dust.setAttribute('particle-system', 'preset: dust; particleCount: ' + pm10ValueVisualized + ';  size: 2;color: #61210B, #61380B, #3B170B');
+   dust.setAttribute('particle-system', 'preset: dust; particleCount: ' + pm10ValueVisualized + ';  size: 2;color: #ff4a03, #ff0b03, #ff0370');
    scene.appendChild(dust);
 
    dust2 = document.createElement('a-entity');
