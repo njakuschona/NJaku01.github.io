@@ -171,6 +171,7 @@ function renderDustComparison(dustP, dustO, low, high, unit) {
          add= dustP-dustO
          document.getElementById("base").innerHTML = "Observed:"
          document.getElementById("add").innerHTML = "Predicted:" 
+         document.getElementById("dif1").innerHTML = "Observed" 
          document.getElementById("baseValue").innerHTML = dustO.substring(0,7) + " " + unit
          document.getElementById("value").innerHTML = dustP.substring(0,7) + " " + unit
          document.getElementById("addValue").innerHTML = add.toString().substring(0,7) + " " + unit
@@ -180,7 +181,8 @@ function renderDustComparison(dustP, dustO, low, high, unit) {
         top = dustO
         add = dustO-dustP
         document.getElementById("add").innerHTML = "Observed:"
-        document.getElementById("base").innerHTML = "Predicted:" 
+        document.getElementById("base").innerHTML = "Predicted:"
+        document.getElementById("dif1").innerHTML = "Predicted"  
         document.getElementById("value").innerHTML = dustO.substring(0,7) + " " + unit
         document.getElementById("baseValue").innerHTML = dustP.substring(0,7) + " " + unit
         document.getElementById("addValue").innerHTML = add.toString().substring(0,7) + " " + unit
