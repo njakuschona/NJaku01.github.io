@@ -67,8 +67,7 @@ svg{
   display: none !important;
 }
 .wizard-btn-finish{
-  position: absolute;
-  right: 0;
+
 }
 
 #arjsDebugUIContainer{
