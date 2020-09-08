@@ -94,7 +94,7 @@ function startIntro(){
 }
 //https://gist.github.com/vectorsize/7031902
 function translateRange(Input , inputHigh , inputLow , outputHigh , OutputLow) {
-	return (OutputLow + (outputHigh - OutputLow) * ((Input - inputLow) / (inputHigh - inputLow));
+	return (OutputLow + (outputHigh - OutputLow) * ((Input - inputLow) / (inputHigh - inputLow)))
 }
 
 let dust;
