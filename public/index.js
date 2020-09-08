@@ -7,6 +7,7 @@ var view= "overlay"
 $('input, select, textarea').on('focus',function() {
     var curScroll = $(window).scrollTop();
     $('html, body').animate({scrollTop:curScroll},1);
+    document.getElementById("splitter").style.bottom =0;
 });
 
 
@@ -91,11 +92,11 @@ function startIntro(){
         }
     })
 }
+//https://gist.github.com/vectorsize/7031902
 function translateRange(Input , inputHigh , inputLow , outputHigh , OutputLow) {
-
-	return ((Input - inputLow) / (inputHigh - inputLow)) *
-		(outputHigh - OutputLow) + OutputLow;
+	return (OutputLow + (outputHigh - OutputLow) * ((Input - inputLow) / (inputHigh - inputLow));
 }
+
 let dust;
 let dust2;
 let dust3;

@@ -23,7 +23,7 @@ const sample = [
   var yScale;
 function initalize(){
 
-    var userAgent = navigator.userAgent.toLowerCase();
+    var userAgent = navigator;
     console.log(userAgent)
 
 svg=d3.select('svg');
