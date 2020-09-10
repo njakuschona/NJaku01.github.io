@@ -138,9 +138,9 @@ function updateAxis(min, max ){
   .call(axisLeft)
 }
 
-function updateText(text){
+function updateText(pollutant , unit){
 d3.select("#change")
-  .html(text);
+  .html(pollutant + " [" + unit + "]");
 }
 
 function redraw(data) {

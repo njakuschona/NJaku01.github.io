@@ -7,7 +7,7 @@ var view= "overlay"
 $('input, select, textarea').on('focus',function() {
     var curScroll = $(window).scrollTop();
     $('html, body').animate({scrollTop:curScroll},1);
-    document.getElementById("splitter").style.bottom =0;
+    $('html, body').style.bottom =0;
 });
 
 
@@ -114,13 +114,13 @@ function renderIntroDust(dust){
     introDust = document.createElement('a-entity');
     introDust.setAttribute('position', '0 2.25 -15');
     introDust.setAttribute('id', 'particles ' + 1);
-    introDust.setAttribute('particle-system', 'preset: dust; particleCount: ' + dust + ';  size: 2;color: #ff4a03, #ff0b03, #ff0370');
+    introDust.setAttribute('particle-system', 'preset: dust; particleCount: ' + dust + ';  size: 3;color: #ff4a03');
     scene.appendChild(introDust);
 }
 function renderDust(dustP, dustO, low, high, unit) {
 
     redraw([{source: "predicted", value: dustP},{source: "observed", value: dustO}]);
-    updateText(unit)
+    updateText(pollutant, unit)
    let scene = document.getElementById('1');
    let scene2 = document.getElementById('2');
    let obs= document.getElementById("obs");
@@ -137,17 +137,15 @@ function renderDust(dustP, dustO, low, high, unit) {
    dust = document.createElement('a-entity');
    dust.setAttribute('position', '0 2.25 -15');
    dust.setAttribute('id', 'particles ' + 1);
-   pm10ValueVisualized = Math.floor(translateRange(dustP, high, low, 20000, 0));
-   console.log(pm10ValueVisualized)
-   dust.setAttribute('particle-system', 'preset: dust; particleCount: ' + pm10ValueVisualized + ';  size: 2;color: #ff4a03, #ff0b03, #ff0370');
+   density = Math.floor(translateRange(dustP, high, low, 20000, 0));
+   dust.setAttribute('particle-system', 'preset: dust; particleCount: ' + density + ';  size: 3;color: #ff4a03');
    scene.appendChild(dust);
 
    dust2 = document.createElement('a-entity');
    dust2.setAttribute('position', '0 2.25 -15');
    dust2.setAttribute('id', 'particles ' + 2);
-   pm10ValueVisualized = Math.floor(translateRange(dustO, high, low, 20000, 0));
-   console.log(pm10ValueVisualized)
-   dust2.setAttribute('particle-system', 'preset: dust; particleCount: ' + pm10ValueVisualized + '; size: 2;  color: #3e79b8, #3e91b8, #3eaab8');
+   density = Math.floor(translateRange(dustO, high, low, 20000, 0));
+   dust2.setAttribute('particle-system', 'preset: dust; particleCount: ' + density + '; size: 3;  color: #3e79b8');
    scene2.appendChild(dust2);
    console.log("renderer")
 }
@@ -157,7 +155,7 @@ function renderDustComparison(dustP, dustO, low, high, unit) {
     console.log(dustP);
 
     redraw([{source: "predicted", value: dustP},{source: "observed", value: dustO}]);
-    updateText(unit);
+    updateText(pollutant, unit)
  
     if(dust3){
     scene.removeChild(dust3)
@@ -194,7 +192,7 @@ function renderDustComparison(dustP, dustO, low, high, unit) {
     dust3.setAttribute('id', 'particles ' + 1);
     particle1 = Math.floor(translateRange(base, high, low, 20000, 0));
     console.log(particle1)
-    dust3.setAttribute('particle-system', 'preset: dust; particleCount: ' + particle1 + ';' + 'size: 2;' + 'color: #e6e600, #ffff00, #ffff1a');
+    dust3.setAttribute('particle-system', 'preset: dust; particleCount: ' + particle1 + ';' + 'size: 3;' + 'color: #e6e600');
     scene.appendChild(dust3);
  
     dust4 = document.createElement('a-entity');
@@ -202,7 +200,7 @@ function renderDustComparison(dustP, dustO, low, high, unit) {
     dust4.setAttribute('id', 'particles ' + 2);
     particle2 = Math.floor(translateRange(top, high, low, 20000, 0));
     console.log(particle2)
-    dust4.setAttribute('particle-system', 'preset: dust; particleCount: ' + (particle2 - particle1) + ';  size:2; color: #800080, #9a009a, #b300b3');
+    dust4.setAttribute('particle-system', 'preset: dust; particleCount: ' + (particle2 - particle1) + ';  size:3; color: #800080');
     scene.appendChild(dust4);
     console.log("renderer")
  }

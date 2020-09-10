@@ -29,9 +29,9 @@ td {
 }
 
 div#container {
-  position: absolute;
-  top: 0%;
-  right: 0%;
+  position: fixed;
+  top: 0;
+  right: 0;
   width: 120px;
   height: 180px;
   margin: auto;
