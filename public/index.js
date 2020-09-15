@@ -17,7 +17,7 @@ window.onload = () => {
     
     $.ajax({
         type: "GET",
-        url: "/public/GemittelteWerte.csv",
+        url: "/public/extractedData.csv",
         dataType: "text",
         success: function(data) {
             csv = $.csv.toObjects(data);

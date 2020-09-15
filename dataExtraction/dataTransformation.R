@@ -1,43 +1,43 @@
-setwd("C:/Users/nick1/OneDrive - uni-muenster.de/UNI/Bachelorarbeit/Paper")
-CO2_Schall=read.csv("Daten/Schall/Fehler_CO2_test.csv", dec=".", sep=" ", header=T)
-NO_Schall=read.csv("Daten/Schall/Fehler_NO_mitlNOx_test.csv", dec=".", sep=" ", header=T)
-NO2_Schall=read.csv("Daten/Schall/Fehler_NO2_mitlNOx_test.csv", dec=".", sep=" ", header=T)
-PM1_Schall=read.csv("Daten/Schall/Fehler_PM1_test.csv", dec=".", sep=" ", header=T)
-PM2.5_Schall=read.csv("Daten/Schall/Fehler_PM2.5_test.csv", dec=".", sep=" ", header=T)
-PM10_Schall=read.csv("Daten/Schall/Fehler_PM10_test.csv", dec=".", sep=" ", header=T)
-PN10_Schall=read.csv("Daten/Schall/Fehler_PN10_test.csv", dec=".", sep=" ", header=T)
-O3_Schall=read.csv("Daten/Schall/Fehler_O3_test.csv", dec=".", sep=" ", header=T)
+
+CO2_Schall=read.csv("Paper/Daten/Schall/Fehler_CO2_test.csv", dec=".", sep=" ", header=T)
+NO_Schall=read.csv("Paper/Daten/Schall/Fehler_NO_mitlNOx_test.csv", dec=".", sep=" ", header=T)
+NO2_Schall=read.csv("Paper/Daten/Schall/Fehler_NO2_mitlNOx_test.csv", dec=".", sep=" ", header=T)
+PM1_Schall=read.csv("Paper/Daten/Schall/Fehler_PM1_test.csv", dec=".", sep=" ", header=T)
+PM2.5_Schall=read.csv("Paper/Daten/Schall/Fehler_PM2.5_test.csv", dec=".", sep=" ", header=T)
+PM10_Schall=read.csv("Paper/Daten/Schall/Fehler_PM10_test.csv", dec=".", sep=" ", header=T)
+PN10_Schall=read.csv("Paper/Daten/Schall/Fehler_PN10_test.csv", dec=".", sep=" ", header=T)
+O3_Schall=read.csv("Paper/Daten/Schall/Fehler_O3_test.csv", dec=".", sep=" ", header=T)
 
 
 #Bis 20er Werte
-NOx_Schall=read.csv("Daten/Schall/bis_20/Fehler_NOx_test.csv", dec=".", sep=" ", header=T)
-NH3_Schall=read.csv("Daten/Schall/bis_20/Fehler_NH3_test.csv", dec=".", sep=" ", header=T)
+NOx_Schall=read.csv("Paper/Daten/Schall/bis_20/Fehler_NOx_test.csv", dec=".", sep=" ", header=T)
+NH3_Schall=read.csv("Paper/Daten/Schall/bis_20/Fehler_NH3_test.csv", dec=".", sep=" ", header=T)
 
 #----------------------------
 
 #VERKEHR UND ZEIT
-CO2_Zeit=read.csv("Daten/Verkehr_Zeit/Fehler_CO2_Zeit_test.csv", dec=".", sep=" ", header=T)
-CO2_Verkehr=read.csv("Daten/Verkehr_Zeit/Fehler_CO2_Verkehr_test.csv", dec=".", sep=" ", header=T)
-NH3_Zeit=read.csv("Daten/Verkehr_Zeit/Fehler_NH3_Zeit_test.csv", dec=".", sep=" ", header=T)
-NH3_Verkehr=read.csv("Daten/Verkehr_Zeit/Fehler_NH3_Verkehr_test.csv", dec=".", sep=" ", header=T)
-NO_Zeit=read.csv("Daten/Verkehr_Zeit/Fehler_NO_Zeit_test.csv", dec=".", sep=" ", header=T)
-NO_Verkehr=read.csv("Daten/Verkehr_Zeit/Fehler_NO_Verkehr_test.csv", dec=".", sep=" ", header=T)
-NOx_Verkehr=read.csv("Daten/Verkehr_Zeit/Fehler_NOx_Verkehr_test.csv", dec=".", sep=" ", header=T)
-O3_Zeit=read.csv("Daten/Verkehr_Zeit/Fehler_O3_Zeit_test.csv", dec=".", sep=" ", header=T)
-O3_Verkehr=read.csv("Daten/Verkehr_Zeit/Fehler_O3_Verkehr_test.csv", dec=".", sep=" ", header=T)
-PM1_Zeit=read.csv("Daten/Verkehr_Zeit/Fehler_PM1_Zeit_test.csv", dec=".", sep=" ", header=T)
-PM1_Verkehr=read.csv("Daten/Verkehr_Zeit/Fehler_PM1_Verkehr_test.csv", dec=".", sep=" ", header=T)
-PM2.5_Zeit=read.csv("Daten/Verkehr_Zeit/Fehler_PM2.5_Zeit_test.csv", dec=".", sep=" ", header=T)
-PM2.5_Verkehr=read.csv("Daten/Verkehr_Zeit/Fehler_PM2.5_Verkehr_test.csv", dec=".", sep=" ", header=T)
-PM10_Zeit=read.csv("Daten/Verkehr_Zeit/Fehler_PM10_Zeit_test.csv", dec=".", sep=" ", header=T)
-PM10_Verkehr=read.csv("Daten/Verkehr_Zeit/Fehler_PM10_Verkehr_test.csv", dec=".", sep=" ", header=T)
-PN10_Zeit=read.csv("Daten/Verkehr_Zeit/Fehler_PN10_Zeit_test.csv", dec=".", sep=" ", header=T)
-PN10_Verkehr=read.csv("Daten/Verkehr_Zeit/Fehler_PN10_Verkehr_test.csv", dec=".", sep=" ", header=T)
+CO2_Zeit=read.csv("Paper/Daten/Verkehr_Zeit/Fehler_CO2_Zeit_test.csv", dec=".", sep=" ", header=T)
+CO2_Verkehr=read.csv("Paper/Daten/Verkehr_Zeit/Fehler_CO2_Verkehr_test.csv", dec=".", sep=" ", header=T)
+NH3_Zeit=read.csv("Paper/Daten/Verkehr_Zeit/Fehler_NH3_Zeit_test.csv", dec=".", sep=" ", header=T)
+NH3_Verkehr=read.csv("Paper/Daten/Verkehr_Zeit/Fehler_NH3_Verkehr_test.csv", dec=".", sep=" ", header=T)
+NO_Zeit=read.csv("Paper/Daten/Verkehr_Zeit/Fehler_NO_Zeit_test.csv", dec=".", sep=" ", header=T)
+NO_Verkehr=read.csv("Paper/Daten/Verkehr_Zeit/Fehler_NO_Verkehr_test.csv", dec=".", sep=" ", header=T)
+NOx_Verkehr=read.csv("Paper/Daten/Verkehr_Zeit/Fehler_NOx_Verkehr_test.csv", dec=".", sep=" ", header=T)
+O3_Zeit=read.csv("Paper/Daten/Verkehr_Zeit/Fehler_O3_Zeit_test.csv", dec=".", sep=" ", header=T)
+O3_Verkehr=read.csv("Paper/Daten/Verkehr_Zeit/Fehler_O3_Verkehr_test.csv", dec=".", sep=" ", header=T)
+PM1_Zeit=read.csv("Paper/Daten/Verkehr_Zeit/Fehler_PM1_Zeit_test.csv", dec=".", sep=" ", header=T)
+PM1_Verkehr=read.csv("Paper/Daten/Verkehr_Zeit/Fehler_PM1_Verkehr_test.csv", dec=".", sep=" ", header=T)
+PM2.5_Zeit=read.csv("Paper/Daten/Verkehr_Zeit/Fehler_PM2.5_Zeit_test.csv", dec=".", sep=" ", header=T)
+PM2.5_Verkehr=read.csv("Paper/Daten/Verkehr_Zeit/Fehler_PM2.5_Verkehr_test.csv", dec=".", sep=" ", header=T)
+PM10_Zeit=read.csv("Paper/Daten/Verkehr_Zeit/Fehler_PM10_Zeit_test.csv", dec=".", sep=" ", header=T)
+PM10_Verkehr=read.csv("Paper/Daten/Verkehr_Zeit/Fehler_PM10_Verkehr_test.csv", dec=".", sep=" ", header=T)
+PN10_Zeit=read.csv("Paper/Daten/Verkehr_Zeit/Fehler_PN10_Zeit_test.csv", dec=".", sep=" ", header=T)
+PN10_Verkehr=read.csv("Paper/Daten/Verkehr_Zeit/Fehler_PN10_Verkehr_test.csv", dec=".", sep=" ", header=T)
 
 #Bis 20er Werte
-NO2_Zeit=read.csv("Daten/Verkehr_Zeit/bis_20/Fehler_NO2_Zeit_test.csv", dec=".", sep=" ", header=T)
-NO2_Verkehr=read.csv("Daten/Verkehr_Zeit/bis_20/Fehler_NO2_Verkehr_test.csv", dec=".", sep=" ", header=T)
-NOx_Zeit=read.csv("Daten/Verkehr_Zeit/bis_20/Fehler_NOx_Zeit_test.csv", dec=".", sep=" ", header=T)#
+NO2_Zeit=read.csv("Paper/Daten/Verkehr_Zeit/bis_20/Fehler_NO2_Zeit_test.csv", dec=".", sep=" ", header=T)
+NO2_Verkehr=read.csv("Paper/Daten/Verkehr_Zeit/bis_20/Fehler_NO2_Verkehr_test.csv", dec=".", sep=" ", header=T)
+NOx_Zeit=read.csv("Paper/Daten/Verkehr_Zeit/bis_20/Fehler_NOx_Zeit_test.csv", dec=".", sep=" ", header=T)#
 
 CO2_gemessen_verkehr = mean(CO2_Verkehr$gemessen)
 CO2_gemessen_Schall = mean(CO2_Schall$gemessen)
@@ -213,5 +213,6 @@ sd[6,10]= PN10_Zeit
 sd[7,10]= 0
 sd[8,10]= 40000
 sd[9,10]= "n m-3"
-write.csv(sd, file="GemittelteWerte.csv", row.names=T, col.names=T)
-sd2 = read.csv("GemittelteWerte.csv", dec=".", sep=",", header=T)
+write.csv(sd, file="extracedData.csv", row.names=T, col.names=T)
+write.csv(sd, file="../public/extracedData.csv", row.names=T, col.names=T)
+sd2 = read.csv("extractedData.csv", dec=".", sep=",", header=T)
