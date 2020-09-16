@@ -1,0 +1,220 @@
+---
+title: "Combining Augmented Reality and Reproducibilityto convey spatio-temporal results"
+output:
+  html_document:
+    df_print: paged
+author:
+- affiliation: Institute for Geoinformatics, University of Münster
+  name: Nick Jakuschona
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Study Evaluation
+
+## Combine the three user groups
+
+```{r echo=FALSE, results="hide", message=FALSE, comment=FALSE, warning=FALSE}
+library(ggplot2)
+library(lubridate)
+```
+
+First the results of all three user Groups were combined:
+
+```{r }
+
+surveyGroup1 = read.csv("results-survey_group1_codes.csv")
+surveyGroup2 = read.csv("results-survey_group2_codes.csv")
+surveyGroup3 = read.csv("results-survey_group3_codes.csv")
+
+filenames <- c("results-survey_group1_codes.csv", "results-survey_group2_codes.csv", "results-survey_group3_codes.csv")
+survey <- do.call("rbind",lapply(filenames,FUN=function(files){ read.csv(files)}))
+```
+
+## Objective understanding
+
+### Answers
+
+he results of the objective understanding questions are displayed in the following figure. It displays how many questions about the prediction models were answered correctly ("correct"), incorrectly ("incorrect") or answered with ("I do not know").
+Overall, the most questions, 84.6%, were answered correctly. Only one time the questions were answered with "I do not know", which indicates that the visualization was not understood. Five times the questions were answered wrong. Since every participant answered at least one time right, it indicates that the questions and app were understood in general. 
+Between the different questions there is no significant variation identifiable. Every question was answered right eleven times. Two questions were answered wrong two times. The third question was answered wrong one time and one time it was indicated with "I do not know". Since this was the first question for the participant using the app, the reason might be that the application was not fully understood at that time.
+
+```{r pressure, echo=FALSE}
+order= c("correct", "incorrect", "i do not know")
+df <- data.frame(answer = c(rep("correct",3), rep("incorrect",3), rep("i do not know", 3)),
+                Question = rep(c("Polltuant comparison 1", "Polltuant comparison 2", "Paprameter comparison")),
+                frequency = c( sum(survey$NOvsPM1 == "Nitrogene monoxide (NO)"), sum(survey$O3vsPM2 == "Ozone (O3)"), 
+                           sum(survey$TIMEvsTRAFFICvsSOUND == "Time"), sum(survey$NOvsPM1 == "Particulate matter 1 (PM1)"), 
+                           sum(survey$O3vsPM2 == "Particluate matter 2.5 (PM2.5)"), 
+                           sum(survey$TIMEvsTRAFFICvsSOUND == "Sound") + sum(survey$TIMEvsTRAFFICvsSOUND == "Traffic"),
+                           sum(survey$NOvsPM1 == "I do not know"), sum(survey$O3vsPM2 == "I do not know"),
+                           sum(survey$TIMEvsTRAFFICvsSOUND == "I do not know" )))
+
+plotFigure1 = function(){
+ggplot(df, aes(x= factor(answer, level=order), y=frequency, fill = Question)) +
+    xlab("Answer")+      geom_bar(position="stack", stat="identity")}
+
+plotFigure1()
+```
+
+```{r, echo=FALSE}
+minTimeQuestion1 = min(survey$groupTimeNOvsPM1)
+maxTimeQuestion1 = max(survey$groupTimeNOvsPM1)
+meanTimeQuestion1 = mean(survey$groupTimeNOvsPM1)
+minTimeQuestion1Minutes = paste(floor(minTimeQuestion1/60), ":", round(minTimeQuestion1%%60), sep="")
+maxTimeQuestion1Minutes = paste(floor(maxTimeQuestion1/60), ":", round(maxTimeQuestion1%%60), sep="")
+meanTimeQuestion1Minutes = paste(floor(meanTimeQuestion1/60), ":", round(meanTimeQuestion1%%60), sep="")
+
+minTimeQuestion2 = min(survey$groupTimeTIMEvsTRAFFICvsSOUND)
+maxTimeQuestion2 = max(survey$groupTimeTIMEvsTRAFFICvsSOUND)
+meanTimeQuestion2 = mean(survey$groupTimeTIMEvsTRAFFICvsSOUND)
+minTimeQuestion2Minutes = paste(floor(minTimeQuestion2/60), ":", round(minTimeQuestion2%%60), sep="")
+maxTimeQuestion2Minutes = paste(floor(maxTimeQuestion2/60), ":0", round(maxTimeQuestion2%%60), sep="")
+meanTimeQuestion2Minutes = paste(floor(meanTimeQuestion2/60), ":0", round(meanTimeQuestion2%%60), sep="")
+
+minTimeQuestion3 = min(survey$groupTimeO3vsPM2)
+maxTimeQuestion3 = max(survey$groupTimeO3vsPM2)
+meanTimeQuestion3 = mean(survey$groupTimeO3vsPM2)
+minTimeQuestion3Minutes = paste(floor(minTimeQuestion3/60), ":", round(minTimeQuestion3%%60), sep="")
+maxTimeQuestion3Minutes = paste(floor(maxTimeQuestion3/60), ":", round(maxTimeQuestion3%%60), sep="")
+meanTimeQuestion3Minutes = paste(floor(meanTimeQuestion3/60), ":", round(meanTimeQuestion3%%60), sep="")
+```
+
+### Time
+Next to the answer, the time needed to archive the answer was documented. The response for the first question, where two pollutants got compared, needed in average 137 seconds (2:17 minutes), ranging from 55 seconds to 411 seconds (6:51 minutes). For the second question, also comparing two pollutants, on average 219 seconds (3:39 minutes) were needed, ranging from 39 seconds to 801 seconds (13:21 minutes). To answer the question to compare between the three input variables, the participants needed on average 125 seconds (2:05 minutes), ranging from 55 seconds (1:12 minutes) to 462 second (7:42 minutes). Here it is conspicuous that the third question, where three parameters had to be compared, could be answered fastest on average. Apparently, it is more difficult to recognize the result of the second question than the others.
+
+Time | Pollutant comparison 1 | Parameter comparison | Pollutant comparison 2
+-------- | -------- | --------| -------
+*Min*   | `r round(minTimeQuestion1)` seconds (~ `r minTimeQuestion1Minutes` minutes) | `r round(minTimeQuestion2)` seconds (~ `r minTimeQuestion2Minutes` minutes) | `r round(minTimeQuestion3)` seconds (~ `r minTimeQuestion3Minutes` minutes)
+*Max*  | `r round(maxTimeQuestion1)` seconds (~ `r maxTimeQuestion1Minutes` minutes) | `r round(maxTimeQuestion2)` seconds (~ `r maxTimeQuestion2Minutes` minutes) | `r round(maxTimeQuestion3)` seconds (~ `r maxTimeQuestion3Minutes` minutes)
+*Average*  | `r round(meanTimeQuestion1)` seconds (~ `r meanTimeQuestion1Minutes` minutes) | `r round(meanTimeQuestion2)` seconds (~ `r meanTimeQuestion2Minutes` minutes) | `r round(meanTimeQuestion3)` seconds (~ `r meanTimeQuestion3Minutes` minutes)
+
+### Confidence
+
+The participants were asked to indicate their confidence about their answers. An overview of the results is displayed in the following figure. The participants felt confident or very confident while answering 31 of the 39 questions. At two questions, the participants were not very confident. The other questions were answered with neutral confidence. Between the different questions are slight differences, but no trend is visible. 
+
+```{r, echo=FALSE}
+order <- c("very confident", "confident", "neutral", "not confident", "not confident at all")
+dfConfident <- data.frame(confidence = c(rep("very confident",3), rep("confident",3), rep("neutral", 3), rep("not confident", 3), rep("not confident at all",3)),
+                 Question = rep(c("Polltuant Comparisson 1", "Polltuant Comparisson 2", "Paprameter Comparison"),5),
+                 frequency = c( sum(survey$NOvsPM1confidence == "Very confident"), sum(survey$O3vsPM2confidence == "Very confident"), sum(survey$TIMEvsTRAFFICvsSOUNDconfidence == "Very confident"),
+                                sum(survey$NOvsPM1confidence == "Confident"), sum(survey$O3vsPM2confidence == "Confident"), sum(survey$TIMEvsTRAFFICvsSOUNDconfidence == "Confident"),
+                                sum(survey$NOvsPM1confidence == "Neutral"), sum(survey$O3vsPM2confidence == "Neutral"), sum(survey$TIMEvsTRAFFICvsSOUNDconfidence == "Neutral" ),
+                                sum(survey$NOvsPM1confidence == "Not very confident"), sum(survey$O3vsPM2confidence == "Not very confident"), sum(survey$TIMEvsTRAFFICvsSOUNDconfidence == "Not very confident"),
+                                sum(survey$NOvsPM1confidence == "Not confident at all"), sum(survey$O3vsPM2confidence == "Not confident at all"), sum(survey$TIMEvsTRAFFICvsSOUNDconfidence == "Not confident at all")
+                                ))
+
+plotFigure2 = function(){
+  ggplot(dfConfident, aes(x= factor(confidence, level=order), y=frequency, fill = Question)) +
+    xlab("Confidence")+     geom_bar(position="stack", stat="identity")}
+
+plotFigure2()
+```
+
+### SUS Score
+To evaluate the results of the usability scale, a score was computed. Each statement gets a score from one (worst) to four (best). The ten scores of each statement are aggregated and multiplied by 2.5. This results in a score ranging from 25 (worst) to 100 (best). The participants rated our application with a score of 76 in average, ranging from 45 to 95, all scores are visible in the figure.
+
+```{r, echo=FALSE, results="hide", message=FALSE, comment=FALSE, warning=FALSE}
+SUS = survey[, c("SUS.SQ001.", "SUS.SQ002.", "SUS.SQ003.", "SUS.SQ004.", "SUS.SQ005.", "SUS.SQ006.", "SUS.SQ007.", "SUS.SQ008.", "SUS.SQ009.", "SUS.SQ010.")]
+transformToScore = function(x){
+result=0
+  if(x == "Strongly agree"){
+    result = 5;
+  }
+  else if(x == "Agree"){
+    result =  4;
+  }
+  else if(x == "Neither disagree nor agree"){
+    result =  3;
+  }
+  else if(x == "Disagree"){
+    result =  2;
+  }
+  else if(x =="Strongly disagree"){
+    result =  1;
+  }
+  
+  return(result)
+}
+
+
+scoreUneven = function(x) {
+  x = 5- x
+  return (x)
+}
+
+scoreEven = function(x) {
+  x= x-1
+  return (x)
+}
+sus_score<- as.data.frame(lapply(SUS, FUN = function(x) {sapply(x, FUN = transformToScore)}))
+
+library("dplyr")
+
+
+
+sus_score_transformedEven <- as.data.frame(lapply(sus_score[,c(1,3,5,7,9)], FUN = function(x) {sapply(x, FUN = scoreEven)}))
+
+
+sus_score_transformedUneven <- as.data.frame(lapply(sus_score[,c(2,4,6,8,10)], FUN = function(x) {sapply(x, FUN = scoreUneven)}))
+
+sus_score_transformedEven <- sus_score_transformedEven %>% mutate(id = row_number())
+sus_score_transformedUneven <- sus_score_transformedUneven %>% mutate(id = row_number())
+
+sus_score_merged <- merge(sus_score_transformedEven, sus_score_transformedUneven, by = "id")
+
+
+calculateScore = function(x){
+  return (x*2.5)
+}
+sus_score_transformedFinish <- as.data.frame(lapply(sus_score_merged, FUN = function(x) {sapply(x, FUN = calculateScore)}))
+
+sus_score_transformedFinish = sus_score_transformedFinish[2:11]
+score = apply(sus_score_transformedFinish, 1, sum)
+
+overallMean = mean(score)
+
+Participant = c(1,2,3,4,5,6,7,8,9,10,11,12,13)
+
+data <- data.frame(
+  Participant,score
+)
+
+plotFigure3 = function(){
+ggplot(data, aes(x=Participant, y=score, fill="orange")) + 
+  geom_bar(stat = "identity", width=0.9) +
+    xlab("Participant")+
+  geom_hline(aes(yintercept = overallMean, linetype = "average"), color="blue") +
+  scale_x_continuous(breaks=seq(1,13,1)) +
+  geom_text(aes(label = score), position = position_dodge(width = 1), vjust = 1.5, hjust = 0.5) +
+  scale_linetype_manual(name = "", values = c(1,1), 
+                      guide = guide_legend(override.aes = list(color = c("blue")))) +
+    scale_fill_discrete(guide=FALSE)}
+
+plotFigure3()
+```
+
+Next to the score, the participants rated the general user friendliness. Five in each case rated the user friendliness as good and excellent. Two rated as fair and one as best imaginable.
+
+```{r, echo=FALSE}
+order <- c("Best Imaginable", "Excellent", "Good", "Fair", "Poor", "Awful", "Worst Imaginable")
+dfRate <- data.frame(rating = order,
+                 frequency = c( sum(survey$rate.SQ001. == "Best Imaginable"),
+                                sum(survey$rate.SQ001. == "Excellent"),
+                                sum(survey$rate.SQ001. == "Good"),
+                                sum(survey$rate.SQ001. == "Fair"),
+                                sum(survey$rate.SQ001. == "Poor"),
+                                sum(survey$rate.SQ001. == "Awful"),
+                                sum(survey$rate.SQ001. == "Worst Imaginable")
+                                ))
+
+plotFigure4 = function(){
+  ggplot(dfRate, aes(x= factor(rating, level=order), y=frequency, fill="orange")) +
+           geom_bar(stat='identity')+
+          theme(legend.position = "none")+
+    xlab("Rating")}
+
+plotFigure4()
+```
