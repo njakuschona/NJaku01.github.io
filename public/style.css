@@ -57,8 +57,9 @@ svg{
   background-color: white;
   z-index: 2003;
   width: 100vw;
-  position: absolute;
-  height: 100vh;
+  position: fixed;
+  bottom: 0%;
+  height: auto;
   text-align: center;
   text-justify: center;
 }
